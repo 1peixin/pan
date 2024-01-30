@@ -1,0 +1,467 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<meta content="yes" name="apple-mobile-web-app-capable">
+<!-- 防止网页自动缩放 -->
+<title>民兴学校高中部成绩查询系统</title>
+<link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+<link rel="stylesheet" href="/Public/static/jquery_weui/lib/weui.min.css">
+<link rel="stylesheet" href="/Public/static/jquery_weui/css/jquery-weui.min.css">
+<script src="/Public/static/jquery_weui/lib/jquery-2.1.4.js"></script>
+<script src="/Public/static/jquery_weui/js/jquery-weui.min.js"></script>
+<style type="text/css">
+.s_page-header_pic{
+	position:relative;display:table; width:100%;
+}
+.s_page-header_pic .banner-img{
+	position:relative;width:100%;
+}
+.s_page-header_pic .banner-text{
+	position: absolute;top:42%;text-align: center;width: 100%;font-size:22px;color:#fff;
+}
+.s_page-header_color{
+	padding:45px 20px;text-align:center;font-size:22px;color:#fff;
+}
+body,html{
+	background:#F0EFF4;
+	margin: 0;
+	padding:0;
+	height: 100%;
+}
+#wrapper {
+	min-height: 100%;
+	margin-bottom: -110px;
+}
+.ad-list{
+ margin:10px;
+}
+#footer,.push {
+	height:120px;
+}
+.cert-box{
+	padding:20px;
+}
+.cert-box .cert-row{
+	margin-bottom:10px;
+}
+.cert-box .cert-row .b-txt{
+	font-weight:bold;
+}
+.weui-input{
+	border: 1px solid #ececec;
+	padding:5px;
+	box-sizing: border-box;
+	height: auto;
+	border-radius: 0;
+}
+.weui-cells {
+    font-size: 14px;
+}
+.more-container{
+	font-size:14px;text-align:center;margin-bottom: 10px;
+}
+.more-container a{
+	color:#0066FF;
+}
+</style>
+
+<style>
+body{
+	height:auto;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+html,body{
+	background: #FFFFFF;
+}
+*{ 
+    -webkit-tap-highlight-color: rgba(0,0,0,0);  
+	-webkit-tap-highlight-color: transparent;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    background-color: transparent;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+.table-bordered {
+    border: 1px solid #ddd;
+}
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+    border: 1px solid #ddd;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+td, th {
+    padding: 0;
+}
+a:link{text-decoration:none;} 
+a:visited{text-decoration:none;} 
+a:active{text-decoration:none;}
+.table{
+	table-layout:fixed;word-wrap:break-word;
+}.table-bordered>tbody>tr>td, 
+.table-bordered>tbody>tr>th, 
+.table-bordered>tfoot>tr>td, 
+.table-bordered>tfoot>tr>th, 
+.table-bordered>thead>tr>td, 
+.table-bordered>thead>tr>th{
+	border:1px solid #a0cffe;
+}
+.table .left_cell{
+		width:30%;	text-align:left;
+	background:#f0f8ff;
+}
+.table .right_cell{
+		width:70%;	text-align:left;
+	background:#ffffff;
+	word-break: break-all;
+}
+.table .left_cell .form_cell{
+	color:#333333;
+}
+.result_tips{
+	color:#2568cc;
+	padding:0;
+}
+.editable_input{
+	border:1px solid #C0C0C0;
+	width:100%;
+	border-radius:0;
+	font-size:15px;
+}
+.js_result_table input[type=text]{
+	height:30px;
+}
+.js_result_table .radio,.js_result_table .checkbox{
+	vertical-align:middle;
+}
+.js_result_table .label{
+	margin-right: 10px;
+}
+.weui-btn_small{
+	display: inline-block;
+    line-height: 2.3;
+    font-size: 13px;
+}
+.red-star{
+	color: red;
+    vertical-align: middle;
+}
+#open-sign-window{
+	display:inline-block;
+	font-size:13px;
+	margin-top:45px;
+	padding:4px 10px;
+	cursor:pointer;
+	background:#ebebeb;
+	border:1px solid #a3a3a3;
+	border-radius:2px;
+}
+.js-edit-item .label span{
+	vertical-align: middle;
+}
+.vip-result-tips{
+	margin:20px 0;
+}
+.vip-result-tips img{
+	max-width:100%;
+}
+.scale-img{
+    max-width: 100%;
+}
+.qr-box{
+	background-color:#f2f4f6;
+	padding:10px 20px;
+	margin:10px;
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+.qr-box .title{
+	font-size:16px;
+	font-weight: bold;
+}
+.qr-box .sub-title{
+	margin-top: 4px;
+}
+.push {
+ 	height:1px;
+}
+.ad-container {
+	padding: 10px; background-color: #EAEAEA;
+}
+.more-opt-box{
+	display:flex;font-size:12px;padding: 10px 20px;margin: 10px;justify-content: space-between;text-align: center;
+}
+.more-opt-item .icon{
+	height: 24px;
+	width: 24px;
+	margin-bottom:4px;
+}
+.more-opt-item .txt{
+	display: block;
+}
+.more-opt-item a,.more-opt-item a:hover,.more-opt-item a:visited,.more-opt-item a:active{
+	color: #333;
+}
+</style>
+
+
+</head>
+<body>
+	<div id="wrapper">
+		<div class="s_page-header_color" style="background:#0166cc;">
+		查询结果	</div>
+		
+<div id="result_content" class="container" style="margin-top:20px;">
+		<div id="result_data_table">
+	<table class="table table-bordered s_table-bordered js_result_table" data-id="299">
+			<tr>
+										<td class="left_cell"><span >姓名</span></td>
+											<td class="right_cell" contenteditable="true">刘邦庆</td>									</tr><tr>
+										<td class="left_cell"><span >身份证号</span></td>
+											<td class="right_cell" contenteditable="true">1008611</td>									</tr><tr>
+										<td class="left_cell"><span >准考证号</span></td>
+											<td class="right_cell" contenteditable="true">114514</td>									</tr><tr>
+										<td class="left_cell"><span >语文</span></td>
+											<td class="right_cell" contenteditable="true">1</td>									</tr><tr>
+										<td class="left_cell"><span >数学</span></td>
+											<td class="right_cell" contenteditable="true">1</td>									</tr><tr>
+										<td class="left_cell"><span >英语</span></td>
+											<td class="right_cell" contenteditable="true">1</td>									</tr><tr>
+										<td class="left_cell"><span >政治</span></td>
+											<td class="right_cell" contenteditable="true">1</td>									</tr><tr>
+										<td class="left_cell"><span >物理</span></td>
+											<td class="right_cell" contenteditable="true">1</td>									</tr><tr>
+										<td class="left_cell"><span >化学</span></td>
+											<td class="right_cell" contenteditable="true">1</td>									</tr><tr>
+										<td class="left_cell"><span >历史</span></td>
+											<td class="right_cell" contenteditable="true">1</td>									</tr><tr>
+										<td class="left_cell"><span >地理</span></td>
+											<td class="right_cell" contenteditable="true">1</td>									</tr><tr>
+										<td class="left_cell"><span >生物</span></td>
+											<td class="right_cell" contenteditable="true">1</td>									</tr><tr>
+										<td class="left_cell"><span >总分</span></td>
+											<td class="right_cell" contenteditable="true">1</td>									</tr>		</table>		</div>
+		<div style="text-align:center;">
+					</div>
+			<div class="result_tips" style="margin:20px 0;">对成绩有疑问请与老师联系。</div></div>
+	<div class="more-opt-box">
+		<div class="more-opt-item">
+			<a href="/public/saveresulthelp.html">
+				<img class="icon" src="./images/save.png"/>
+				<span class="txt">保存查询</span>
+			</a>
+		</div>
+		<div class="more-opt-item">
+			<a href="/public/pdfhelp.html">
+				<img class="icon" src="./images/pdf.png"/>
+				<span class="txt">导出PDF</span>
+			</a>
+		</div>
+		<div class="more-opt-item" id="doLockBtn">
+			<img class="icon" src="./images/lock.png"/>
+			<div class="txt">锁定查询</div>
+		</div>
+		<div class="more-opt-item">
+			<a href="/index/subnotice.html">
+				<img class="icon" src="./images/notice.png"/>
+				<span class="txt">订阅通知</span>
+			</a>
+		</div>
+		<div class="more-opt-item">
+			<a href="https://www.yichafen.com/public/exitSuccess?tuCode=">
+				<img class="icon" src="./images/exit.png"/>
+				<span class="txt">退出查询</span>
+			</a>
+		</div>
+	</div><div class="qr-box">
+	<div>
+		<div class="title">长按关注查询公众号</div>
+		<div class="sub-title">快速进入查询 保存结果 接收通知</div>
+	</div>
+	<div>
+	    <img style="width:100px;height:100px;" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQHr8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyaDNmbjhqc0VldkYxMDAwME0wN20AAgTSU7hlAwQAAAAA"/>
+	</div>
+</div>
+
+		<div class="push"></div>
+	</div>
+	
+	
+<script type="text/javascript">
+$("#doLockBtn").click(function(){
+    	location.href="/public/lockfailhelp.html";});
+$("#doSaveEditedFieldsBtn").click(function(){
+	var result = checkData();
+	if(result===false){
+		return;
+	}
+				$.confirm("确认提交吗？", function() {
+			saveData(result);
+		}, function() {});});
+
+function checkData(){
+	var updateData = [];
+	var valid = true;
+	$("#result_content .js_result_table").each(function(index,ele){
+		var data = {};
+		data['id'] = $(ele).data("id");
+		var editedFields = getEditedFields(ele);
+		if(editedFields === false){
+			valid = false;
+			return false;
+		}
+		data['editedFields'] = editedFields;
+		updateData.push(data);
+	});
+	if(!valid){
+		return false;
+	}
+	return updateData;
+}
+
+function saveData(updateData){
+	$.post("/public/dosaveeditedfields.html", {updateData: updateData}, function(result){
+		if(result.status == 1){
+			location.href="/mobile/savesuccess.html";
+		}else{
+			$.alert(result.info);
+		}
+	},"json");
+}
+
+function getEditedFields(ele){
+	var editedFields = [];
+	var valid = true;
+	$(ele).find(".js-edit-item").each(function(index,ele){
+		var type = $(ele).data('type');
+		if($(ele).is('div')){
+			var name = $(ele).data('name');
+			var id = $(ele).data('id');
+			var inputName = name+'-'+id;
+			if(type=='checkbox'){
+				var chk_vals = [];
+				$("input[name='"+inputName+"']:checked").each(function(){
+					chk_vals.push($(this).val());
+				});
+				var value = chk_vals.join(",");
+			}else{
+				var value = $("input[name='"+inputName+"']:checked").val();
+			}
+		}else{
+			var name = $(ele).attr("name");
+		    var value = $(ele).val();
+		}
+		value = (value==undefined?'':value);
+		var required = $(ele).data('required');
+		var label = $(ele).data('label');
+		var rule = $(ele).data('rule');
+		if(required=='yes' && value==''){
+		    if(type=='image'){
+		        $.alert('['+label+']请上传图片');
+		    }else{
+		        $.alert('['+label+']不能为空');
+		    }
+			valid = false;
+			return false;
+		}
+		if(type=='text' && value.length>Number(rule)){
+			$.alert('['+label+']长度不能超过'+rule+'个字符');
+			valid = false;
+			return false;
+		}
+		if(type=='mobile' && value!='' && !checkMobile(value)){
+			$.alert('['+label+']请填写正确的手机号');
+			valid = false;
+			return false;
+		}
+		if(type=='idcard' && value!='' && !checkIdcard(value)){
+			$.alert('['+label+']请填写正确的身份证号');
+			valid = false;
+			return false;
+		}
+		var m = {};
+		m['name'] = name;
+		if(type=='idcard'){
+		    m['value'] = value?value.toUpperCase():value;
+		}else{
+		    m['value'] = value;
+		}
+		editedFields.push(m);
+	});
+	if(valid){
+		return editedFields;
+	}
+	return false;
+}
+
+function checkIdcard(idcard){
+    var reg=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$/;
+    return reg.test(idcard);
+}
+
+function checkMobile(mobile){
+	var reg=/^[1][0-9]{10}$/;
+	return reg.test(mobile);
+}
+
+var pageType = "mobile";
+$("#jsNextPageBtn").click(function(){
+	var totalpage = $("#jsNextPageBtn").data('totalpage');
+	var currentpage = $("#jsNextPageBtn").data('currentpage');
+	var nextpage = currentpage+1;
+	if(nextpage > totalpage){
+		$("#jsNextPageBtn").hide();
+		return;
+	}else{
+		$("#jsNextPageBtn").data('currentpage', nextpage);
+	}
+	showLoading();
+	$.get("/public/queryresultpage.html", {pageType: pageType, pageNum:nextpage}, function(result){
+		$("#result_data_table").append(result);
+		if(nextpage >= totalpage){
+			$("#jsNextPageBtn").hide();
+		}
+		hideLoading();
+	});
+});
+
+function showLoading(){
+	$("#jsNextPageBtn").hide();
+	$("#jsLoadingTip").show();
+}
+function hideLoading(){
+	$("#jsNextPageBtn").show();
+	$("#jsLoadingTip").hide();
+}
+
+</script>
+
+</body>
+</html>
