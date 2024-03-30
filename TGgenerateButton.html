@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Generator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h2>URL Generator</h2>
+
+        <div class="form-group">
+            <button id="addBtn" class="btn btn-primary">添加按钮</button>
+        </div>
+
+        <div id="inputFields">
+            <!-- Input fields will be added here -->
+        </div>
+
+        <button id="generateBtn" class="btn btn-success mt-3">生成按钮</button>
+
+        <div class="form-group mt-3">
+            <input type="text" id="output" class="form-control" readonly>
+        </div>
+
+        <button id="copyBtn" class="btn btn-secondary">复制</button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var counter = 0;
+            // Add input fields
+            $("#addBtn").click(function () {
+                counter++;
+                var html = '<div class="form-group row" id="row' + counter + '">';
+                html += '<div class="col-md-3">';
+                html += '<input type="text" class="form-control name" placeholder="Name">';
+                html += '</div>';
+                html += '<div class="col-md-7">';
+                html += '<input type="text" class="form-control url" placeholder="URL">';
+                html += '</div>';
+                html += '<div class="col-md-2">';
+                html += '<button class="btn btn-danger btn-remove" data-rowid="row' + counter + '">Remove</button>';
+                html += '</div>';
+                html += '</div>';
+                $("#inputFields").append(html);
+            });
+
+            // Remove input fields
+            $(document).on('click', '.btn-remove', function () {
+                var rowId = $(this).data('rowid');
+                $('#' + rowId).remove();
+            });
+
+
+            // Generate URL string
+            $("#generateBtn").click(function () {
+                var output = "";
+                $(".name").each(function (index) {
+                    var name = $(this).val().trim();
+                    var url = $(".url").eq(index).val().trim();
+                    if (name !== "" && url !== "") {
+                        if (index > 0) {
+                            output += " + ";
+                        }
+                        output += name + " = " + url;
+                    }
+                });
+                $("#output").val(output);
+            });
+
+            // Copy to clipboard
+            $("#copyBtn").click(function () {
+                var copyText = document.getElementById("output");
+                copyText.select();
+                document.execCommand("copy");
+                alert("已复制到剪贴板");
+            });
+        });
+    </script>
+
+</body>
+
+</html>
